@@ -195,17 +195,11 @@ void MQTTManager::init(ConnectionManager &connectionManager) {
 
 boolean MQTTManager::connect() {
   if(!isConnected()) {
-    long now = millis();
-    if (now - _lastReconnectAttempt > 5000) {
-      _lastReconnectAttempt = now;
-      if(_pubsubClient.connect(_clientId,
+    if(!_pubsubClient.connect(_clientId,
                         _connectionManager->_mqtt_user,
                         _connectionManager->_mqtt_password)) {
-        _lastReconnectAttempt = 0;
-      } else {
         Serial.print("Connection to MQTT-Server failed, rc=");
         Serial.println(_pubsubClient.state());
-      }
     }
   }
   return isConnected();
