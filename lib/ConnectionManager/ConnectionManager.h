@@ -61,6 +61,7 @@ private:
   PubSubClient _pubsubClient;
   ConnectionManager* _connectionManager;
   const char *_clientId;
+  long _lastReconnectAttempt = 0;
 };
 
 #endif
